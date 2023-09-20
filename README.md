@@ -1,7 +1,15 @@
-# base
+# Vue 3 Chat App
+
+This project is a simple chat application built using Vue 3, featuring a single route dedicated to chat functionality. It is built upon the Vuetify framework and leverages Vuex for data storage, along with Socket.io for real-time message listening.
+
+![App Screenshot](https://raw.githubusercontent.com/brunoromerope/chatroom-front/main/screenshot.png)
 
 ## Project setup
 
+Before you get started, make sure you have [Node.js](https://nodejs.org/) installed.
+
+
+### Install dependencies
 ```
 # yarn
 yarn
@@ -15,9 +23,7 @@ pnpm install
 # pnpm
 bun install
 ```
-
 ### Compiles and hot-reloads for development
-
 ```
 # yarn
 yarn dev
@@ -33,7 +39,6 @@ bun run dev
 ```
 
 ### Compiles and minifies for production
-
 ```
 # yarn
 yarn build
@@ -48,22 +53,19 @@ pnpm build
 bun run build
 ```
 
-### Lints and fixes files
+## Features
 
-```
-# yarn
-yarn lint
+- Rooms: Automatic chat room for connected user.
+- Messages: Receive new messages by listening on socket.io.
 
-# npm
-npm run lint
+## Dependencies
 
-# pnpm
-pnpm lint
+- [Vue Router](https://router.vuejs.org/)
+- [Vuex](https://vuex.vuejs.org/)
+- [Axios](https://axios-http.com/)
+- [Vuetify](https://vuetifyjs.com/)
 
-# bun
-bun run lint
-```
 
-### Customize configuration
+## License
 
-See [Configuration Reference](https://vitejs.dev/config/).
+This project is licensed under the MIT License.
