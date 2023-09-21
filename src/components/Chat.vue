@@ -9,7 +9,10 @@
                     <h2>Rooms ({{ rooms.length }})</h2>
                 </div>
                 <div ref="roomsRef" class="rooms">
-                    <Room v-for="room in rooms" :key="room._id" :room="room" @click="chooseRoom(room)"/>
+                    <Room v-for="room in rooms" :key="room._id" :room="room" :isOnline="isOnline(room.name)" @click="chooseRoom(room)"/>
+                </div>
+                <div class="text-center">
+                    <h2>Connected users ({{ conUsers.length }})</h2>
                 </div>
             </v-col>
             <v-col class="messages-container" cols="8" >
@@ -49,9 +52,21 @@
             this.$store.dispatch('newRoom')
         },
         mounted () {
+
+            socket.emit('setUsername', this.username)
+
+            socket.on('getUsers', () => {
+                socket.emit('setUsername', this.username)
+            })
+
+            socket.on('userList', (data) => {
+                console.log(data);
+                this.$store.commit('setConUsers', data);
+            });
+
             socket.on('message', (data) => {
                 this.$store.commit('addMessage', data);
-                //this.$nextTick(() => this.scrollToBottom())
+                this.$nextTick(() => this.scrollToBottom());
             });
 
             socket.on('room', (data) => {
@@ -60,7 +75,7 @@
 
             if (this.selectedRoom){
 
-                this.scrollToBottom()
+                this.scrollToBottom();
             }
         },
         data () {
@@ -80,6 +95,9 @@
             },
             selectedRoom () {
                 return this.$store.getters.selectedRoom
+            },
+            conUsers () {
+                return this.$store.getters.conUsers
             }
         },
         watch: {
@@ -108,6 +126,9 @@
                     this.$refs.messagesRef.scrollTop = this.$refs.messagesRef.scrollHeight
                 }
 
+            },
+            isOnline (usrname) {
+                return this.conUsers.includes(usrname)
             },
             logOut () {
                 this.$store.commit('reset')

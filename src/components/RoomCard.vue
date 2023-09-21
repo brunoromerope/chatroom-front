@@ -2,8 +2,8 @@
     <v-container>
         <div class="room">
             <div class="room-inner">
-                <div class="content">
-                    {{ room.name }}
+                <div :class="(isOnline) ? 'content online' : 'content'">
+                    {{ room.name }} {{ isOnline ? ' - Online' : '' }}
                 </div>
             </div>
         </div>
@@ -13,7 +13,7 @@
 <script>
 
     export default {
-        props: ['room'],
+        props: ['room', 'isOnline'],
         data () {
             return {
 
@@ -43,6 +43,10 @@
             font-size: 18px;
             line-height: 1.2em;
             text-align: left;
+
+            &.online {
+                color: forestgreen;
+            }
         }
     }
 

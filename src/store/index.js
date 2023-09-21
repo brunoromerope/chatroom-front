@@ -9,7 +9,8 @@ const store = createStore({
       rooms: [],
       messages: [],
       url: window.location.origin,
-      selectedRoom: null
+      selectedRoom: null,
+      conUsers: 0
     }
   },
   mutations: {
@@ -33,11 +34,15 @@ const store = createStore({
     addRoom (state, payload) {
         state.rooms.push(payload)
     },
+    setConUsers (state, payload) {
+        state.conUsers = payload
+    },
     reset (state) {
       state.username = null
       state.rooms = []
       state.messages = []
       state.selectedRoom = null
+      state.conUsers = []
     }
   },
   actions: {
@@ -98,6 +103,12 @@ const store = createStore({
     },
     selectedRoom (state) {
         return state.selectedRoom
+    },
+    conUsers (state) {
+        return state.conUsers
+    },
+    url (state) {
+        return state.url
     }
   }
 })
